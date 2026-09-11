@@ -1,0 +1,39 @@
+{
+  "title": "Analysis code for laboratory-reported versus CLSI M100 2022 AST phenotypes (ARMD-MGB)",
+  "description": "Python analysis code and non-identifiable aggregate tables and figures comparing laboratory-reported antimicrobial susceptibility categories with CLSI M100 2022 interpretations of the same recorded MIC or zone in ARMD-MGB v1.0.0. Patient-level data are not included.",
+  "upload_type": "software",
+  "publication_date": "2026-09-10",
+  "creators": [
+    {
+      "name": "Msemakweli, January G.",
+      "orcid": "0009-0007-6743-8479",
+      "affiliation": "Department of Epidemiology, Johns Hopkins Bloomberg School of Public Health"
+    }
+  ],
+  "keywords": [
+    "CLSI",
+    "breakpoints",
+    "piperacillin-tazobactam",
+    "Enterobacterales",
+    "SDD",
+    "antimicrobial susceptibility",
+    "ARMD-MGB"
+  ],
+  "license": "mit",
+  "access_right": "open",
+  "doi": "10.5281/zenodo.22699153",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/january-msemakweli/CLSI-2022-Laboratory-AST-Phenotypes",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://physionet.org/content/armd-mgb/1.0.0/",
+      "relation": "isDerivedFrom",
+      "resource_type": "dataset",
+      "scheme": "url"
+    }
+  ]
+}

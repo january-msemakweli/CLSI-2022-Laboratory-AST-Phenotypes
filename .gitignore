@@ -1,0 +1,40 @@
+# -------------------------------------------------------------------------
+# Patient-level derived data: NEVER commit. These are derived from ARMD-MGB
+# under a PhysioNet credentialed data use agreement and cannot be redistributed.
+# -------------------------------------------------------------------------
+derived/
+
+# Raw ARMD-MGB tables, if ever placed inside the project tree
+physionet.org/
+*.csv.gz
+
+# -------------------------------------------------------------------------
+# Manuscript sources and third-party article PDFs stay out of this public
+# repository, which is intended only for the analysis code and its
+# non-identifiable outputs.
+# -------------------------------------------------------------------------
+manuscript/
+papers/
+
+# -------------------------------------------------------------------------
+# Python
+# -------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# -------------------------------------------------------------------------
+# Local helpers (never publish tokens or draft deposition notes)
+# -------------------------------------------------------------------------
+_reserve_zenodo.py
+_publish_zenodo.py
+_zenodo_deposit.json
+.env
+
+# -------------------------------------------------------------------------
+# OS / editor
+# -------------------------------------------------------------------------
+.DS_Store
+Thumbs.db

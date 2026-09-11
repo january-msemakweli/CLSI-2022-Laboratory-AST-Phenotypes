@@ -1,0 +1,6 @@
+group,n,lab_S,clsi_S,clsi_SDD,lab_I,clsi_I,lab_R,clsi_R,s_to_sdd,s_to_sdd_pct
+E. coli,78023,96.1,69.0,27.2,2.0,0.0,1.8,3.8,21181,27.1
+K. pneumoniae,20220,90.7,63.4,27.3,4.2,0.0,5.1,9.3,5516,27.3
+Other selected Enterobacterales,21666,88.5,67.1,21.6,3.0,0.0,8.5,11.4,4666,21.5
+All selected Enterobacterales,119909,93.9,67.7,26.2,2.6,0.0,3.6,6.1,31363,26.2
+P. aeruginosa,12333,82.1,81.2,0.0,9.6,11.3,8.3,7.5,0,0.0

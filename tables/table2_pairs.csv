@@ -1,0 +1,20 @@
+organism,drug,n,lab_S,clsi_S,clsi_SDD,lab_R,clsi_R,s_to_sdd,s_to_r,r_to_s
+E. coli,Piperacillin-tazobactam,78023,96.1,69.0,27.2,1.8,3.8,21181,0,0
+E. coli,Cefepime,70617,93.9,77.5,18.1,5.2,4.3,11889,12,333
+E. coli,Ceftriaxone,79606,88.3,85.2,0.0,11.5,14.4,0,2474,43
+E. coli,Cefazolin,63801,81.8,85.5,0.0,17.4,11.6,0,160,3943
+E. coli,Meropenem,71802,99.9,98.4,0.0,0.1,1.5,0,1025,0
+E. coli,Ciprofloxacin,72265,74.3,59.8,0.0,23.8,37.6,0,9798,0
+E. coli,Levofloxacin,71391,73.2,56.9,0.0,22.1,35.6,0,9288,0
+E. coli,Trimethoprim-sulfamethoxazole,79720,73.8,81.6,0.0,26.2,18.4,0,0,6266
+K. pneumoniae,Piperacillin-tazobactam,20220,90.7,63.4,27.3,5.1,9.3,5516,1,0
+K. pneumoniae,Cefepime,18327,91.3,79.2,14.0,7.3,6.7,2270,2,64
+K. pneumoniae,Ceftriaxone,20272,83.7,81.4,0.0,16.1,18.2,0,477,12
+K. pneumoniae,Ciprofloxacin,18645,81.6,67.7,0.0,15.0,29.3,0,2374,0
+K. pneumoniae,Levofloxacin,18457,82.2,65.8,0.0,10.0,22.5,0,2087,0
+P. aeruginosa,Piperacillin-tazobactam,12333,82.1,81.2,0.0,8.3,7.5,0,0,0
+P. aeruginosa,Ciprofloxacin,12616,71.2,65.0,0.0,21.5,23.4,0,0,1
+S. aureus,Oxacillin,13218,64.7,72.0,0.0,35.3,28.0,0,0,967
+S. aureus,Cefoxitin,7796,64.3,99.7,0.0,35.7,0.3,0,0,2754
+S. aureus,Clindamycin,18222,65.3,86.1,0.0,34.7,13.9,0,0,3792
+S. aureus,Vancomycin,21392,100.0,100.0,0.0,0.0,0.0,0,0,0
