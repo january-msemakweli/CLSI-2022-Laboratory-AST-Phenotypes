@@ -61,7 +61,7 @@ redistribute those files.
 
 ## Citation
 
-Zenodo: [https://doi.org/10.5281/zenodo.22699153](https://doi.org/10.5281/zenodo.22699153)
+Zenodo: [https://doi.org/10.5281/zenodo.23110407](https://doi.org/10.5281/zenodo.23110407)
 
 GitHub: [https://github.com/january-msemakweli/CLSI-2022-Laboratory-AST-Phenotypes](https://github.com/january-msemakweli/CLSI-2022-Laboratory-AST-Phenotypes)
 

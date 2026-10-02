@@ -220,6 +220,11 @@ def mic_notation(df: pd.DataFrame) -> dict:
 
 
 def mic_bin(val, ineq, panel):
+    """Separate an exact doubling dilution from a censored bound.
+
+    A result stored as <=8 or <=16 is not an MIC of 8 or 16. The bound
+    stays in its own bin so the histogram does not treat it as one.
+    """
     if str(panel).strip() != "broth_microdilution":
         return None
     try:
@@ -231,15 +236,21 @@ def mic_bin(val, ineq, panel):
     ineq = str(ineq).strip()
     if x <= 4:
         return "leq4"
-    if x == 8:
-        return "8"
-    if x == 16:
-        return "16"
-    if x == 32:
-        return "32"
-    if x == 64:
-        return "64"
-    return "geq128"
+    if x == 8 and ineq == "<=":
+        return "le8"
+    if x == 8 and ineq == "":
+        return "exact8"
+    if x == 16 and ineq in {"<=", "<"}:
+        return "le16"
+    if x == 16 and ineq == "":
+        return "exact16"
+    if x == 32 and ineq == "":
+        return "exact32"
+    if x == 64 and ineq == "":
+        return "exact64"
+    if (x == 64 and ineq == ">") or (x >= 128 and ineq == ">="):
+        return "hi"
+    return None
 
 
 def save_fig(fig, stem):
@@ -285,14 +296,27 @@ def fig_susceptibility(analytic: pd.DataFrame):
 
 def fig_ptz_mic(analytic: pd.DataFrame):
     apply_journal_style()
-    order = ["leq4", "8", "16", "32", "64", "geq128"]
-    tick = [r"$\leq$4", r"8/$\leq$8", r"16/$\leq$16", "32", "64", r"$\geq$128"]
+    order = ["leq4", "le8", "exact8", "le16", "exact16", "exact32", "exact64", "hi"]
+    tick = [r"$\leq$4", r"$\leq$8", "8", r"$\leq$16", "16", "32", "64", r"$>$64"]
     panels = [
         ("ESCHERICHIA COLI", r"A.  $\mathit{Escherichia\ coli}$"),
         ("KLEBSIELLA PNEUMONIAE", r"B.  $\mathit{Klebsiella\ pneumoniae}$"),
     ]
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.6), sharey=False)
-    colors = ["#BDBDBD", "#BDBDBD", "#6B6B6B", "#2F2F2F", "#2F2F2F", "#2F2F2F"]
+    fig, axes = plt.subplots(1, 2, figsize=(7.6, 3.8), sharey=False)
+    # Light gray: at or below the susceptible breakpoint, including the <=8 bound.
+    # White with a hatch: <=16, a bound that can sit in susceptible or SDD.
+    # Mid gray: exact 16, the SDD dilution. Dark: resistant.
+    colors = [
+        "#BDBDBD",
+        "#BDBDBD",
+        "#BDBDBD",
+        "#FFFFFF",
+        "#6B6B6B",
+        "#2F2F2F",
+        "#2F2F2F",
+        "#2F2F2F",
+    ]
+    hatches = ["", "", "", "///", "", "", "", ""]
     for ax, (org, title) in zip(axes, panels):
         g = analytic.loc[
             (analytic["organism"] == org)
@@ -305,16 +329,18 @@ def fig_ptz_mic(analytic: pd.DataFrame):
         g = g.loc[g["bin"].notna()]
         counts = g["bin"].value_counts()
         heights = [int(counts.get(b, 0)) for b in order]
-        ax.bar(
+        bars = ax.bar(
             np.arange(len(order)),
             heights,
             color=colors,
             width=0.82,
-            edgecolor="white",
+            edgecolor="#4D4D4D",
             linewidth=0.4,
         )
+        for bar, hatch in zip(bars, hatches):
+            bar.set_hatch(hatch)
         ax.set_xticks(np.arange(len(order)))
-        ax.set_xticklabels(tick)
+        ax.set_xticklabels(tick, fontsize=7)
         ax.set_title(title, loc="left", fontsize=9)
         ax.set_xlabel("Piperacillin-tazobactam MIC (µg/mL)")
         n = int(len(g))
@@ -324,12 +350,13 @@ def fig_ptz_mic(analytic: pd.DataFrame):
 
     fig.legend(
         handles=[
-            Patch(facecolor="#BDBDBD", edgecolor="none", label=r"Susceptible ($\leq$8/4 µg/mL)"),
-            Patch(facecolor="#6B6B6B", edgecolor="none", label="SDD (16/4 µg/mL)"),
-            Patch(facecolor="#2F2F2F", edgecolor="none", label=r"Resistant ($\geq$32/4 µg/mL)"),
+            Patch(facecolor="#BDBDBD", edgecolor="#4D4D4D", label=r"Susceptible ($\leq$8/4)"),
+            Patch(facecolor="#FFFFFF", edgecolor="#4D4D4D", hatch="///", label=r"Censored $\leq$16"),
+            Patch(facecolor="#6B6B6B", edgecolor="#4D4D4D", label="SDD (exact 16/4)"),
+            Patch(facecolor="#2F2F2F", edgecolor="#4D4D4D", label=r"Resistant ($\geq$32/4)"),
         ],
         loc="upper center",
-        ncol=3,
+        ncol=4,
         bbox_to_anchor=(0.5, 1.04),
         frameon=False,
     )
